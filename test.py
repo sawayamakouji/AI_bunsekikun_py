@@ -15,6 +15,22 @@ st.set_page_config(layout='wide')  # レイアウトを横に広げる設定
 
 st.title('データ可視化アプリ')
 
+# サイドバーにマニュアルボタンを追加
+if st.sidebar.button('マニュアルを見る'):
+    with st.expander("マニュアル", expanded=True):
+        st.markdown("""
+        # データ可視化アプリ ユーザーマニュアル
+
+        ようこそ！このデータ可視化アプリを使用して、アップロードしたCSVファイルのデータを簡単に視覚化しましょう。本マニュアルでは、初心者の方でも分かりやすいように、ステップバイステップで操作方法をご紹介します。
+
+        ---
+
+        ## 1. アプリの概要
+
+        ...（前述のマニュアル内容をここに挿入）...
+
+        """, unsafe_allow_html=True)
+
 uploaded_file = st.sidebar.file_uploader('CSVファイルをアップロードしてください。', type='csv')
 
 if uploaded_file is not None:
@@ -146,7 +162,6 @@ if uploaded_file is not None:
 
 
 
-
         if graph_type == '棒グラフ':
             aggregation_type = st.radio('集計方法を選択してください', ['頻度', '合計', '平均'], key='aggregation_type')
             if aggregation_type == '頻度':
@@ -191,4 +206,3 @@ if uploaded_file is not None:
                 st.plotly_chart(fig_corr)
             else:
                 st.error("相関行列を作成するには少なくとも2つの数値列が必要です。")
-
